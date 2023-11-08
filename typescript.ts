@@ -59,6 +59,8 @@ function kkt(sugar: number): number[] {
 
 document.write(kkt(sugar).toString());
 
+
+
 /*var keruletterulet: [number, number] = [sugar * 2 * 3.14, sugar * sugar * 3.14];
 var kerulet: number = keruletterulet[0];
 var terulet: number = keruletterulet[1];
@@ -74,13 +76,50 @@ interface Auto {
     benzinese: boolean
 }
 
+
+
 var auto1: Auto = { gyarto: "Skoda", tipus: "Fabia", hengerurtartalom: 1400, benzinese: true };
+var auto2: Auto = { gyarto: "Opel", tipus: "Astra", hengerurtartalom: 1000, benzinese: true };
+var auto3: Auto = { gyarto: "Tesla", tipus: "Akarmi", hengerurtartalom: 0, benzinese: false };
+
+var autok: Auto[] = [auto1, auto2, auto3];
+
+
+
+
+function minhenger(autok: Auto[]): Auto {
+    var minauto: Auto = autok[0];
+    for (let i = 0; i < autok.length; i++) {
+
+        if (autok[i].hengerurtartalom < minauto.hengerurtartalom) {
+
+            minauto = autok[i]
+
+        }
+    }
+
+    return minauto;
+}
+console.log(minhenger(autok));
+
+function benzinesdb(autok:Auto[]):number {
+    var db:number = 0;
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].benzinese) {
+            db++;
+        }
+    }
+    return db;
+}
+
+var minhengerszoveg:string = JSON.stringify(minhenger(autok));
 
 function Tesztek() {
 
     Rowmaker("Van e minusz", szamtomb, "Igaz kene legyen", vaneminusz(szamtomb));
     Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar));
-
+    Rowmaker("Legkisebb hengeres auto", "3 auto van", "Elvileg a teszla", minhengerszoveg);
+    Rowmaker("Benzinesek szama", "A 3 auto", "Elvileg 2" , benzinesdb(autok));
 
 }
 
