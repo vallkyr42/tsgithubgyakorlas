@@ -123,7 +123,9 @@ function minhenger(autok: Auto[]): Auto {
 }
 console.log(minhenger(autok));
 
-function benzinesdb(autok: Auto[]): number {
+var minhengerszoveg: string = JSON.stringify(minhenger(autok));
+
+ function benzinesdb(autok: Auto[]): number {
     var db: number = 0;
     for (var i = 0; i < autok.length; i++) {
         if (autok[i].benzinese) {
@@ -133,22 +135,22 @@ function benzinesdb(autok: Auto[]): number {
     return db;
 }
 
-var minhengerszoveg: string = JSON.stringify(minhenger(autok));
 
-function atlaghenger(autok: Auto[]): number {
+
+  function atlaghenger(autok: Auto[]): number {
     var atlag: number = 0;
     for (var i: number = 0; i < autok.length; i++) {
         atlag = atlag + autok[i].hengerurtartalom
 
     }
-
-    return atlag / autok.length;
+atlag = atlag / autok.length;
+    return atlag;
 }
 
-function vanebenzines(autok: Auto[]): boolean {
+ function vanebenzines(autok: Auto[]): boolean {
     var valasz: boolean = false;
     for (var i: number = 0; i < autok.length; i++) {
-        if (autok[i].benzinese) {
+        if (autok[i].benzinese == true) {
             valasz = true;
         }
 
@@ -157,54 +159,31 @@ function vanebenzines(autok: Auto[]): boolean {
     return valasz;
 }
 
-function benzineslista(autok: Auto[]): Auto[] {
-    let aktbenzines: Auto[] = [];
+function szetvalogato(autok:Auto[]):[Auto[], Auto[]]{
+    var benzinesek:Auto[] = [];
+    var nembenzinesek:Auto[] = [];
 
-
-    for (let i: number = 0; i < autok.length; i++) {
-        if (autok[i].benzinese) {
-            aktbenzines.push(autok[i]);
+    for(var i:number = 0; i < autok.length; i++){
+        if(autok[i].benzinese == true){
+            benzinesek.push(autok[i]);
         }
-
+        else{
+            nembenzinesek.push(autok[i]);
+        }
     }
 
-    console.log(aktbenzines);
-    return aktbenzines;
-
+    return [benzinesek, nembenzinesek];
 }
 
-var benzines: Auto[] = benzineslista(autok);
-
-
-var benzinesszoveg: string = JSON.stringify(benzines);
-
-
-function nembenzineslista(autok: Auto[]): Auto[] {
-    let aktnembenzines: Auto[] = [];
-
-
-    for (let i: number = 0; i < autok.length; i++) {
-        if (autok[i].benzinese = false) {
-            aktnembenzines.push(autok[i]);
-        }
-
-    }
-
-
-    return aktnembenzines;
-
-}
-
-var nembenzines: Auto[] = nembenzineslista(autok);
-
-
-var nembenzinesszoveg: string = JSON.stringify(nembenzines);
-
+var benzin:Auto[] = szetvalogato(autok)[0];
+var nembenzin:Auto[] = szetvalogato(autok)[1];
+var benzinesszoveg:string = JSON.stringify(benzin);
+var nembenzinesszoveg:string = JSON.stringify(nembenzin);
 
 function Tesztek() {
 
     Rowmaker("Van e minusz", szamtomb, "Igaz kene legyen", vaneminusz(szamtomb));
-    Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar));
+    Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar)); 
     Rowmaker("Legkisebb hengeres auto", "3 auto van", "Elvileg a teszla", minhengerszoveg);
     Rowmaker("Benzinesek szama", "A 3 auto", "Elvileg 2", benzinesdb(autok));
     Rowmaker("Atlagos hengerurtartalom", "A 3 auto", "Elvileg 800", atlaghenger(autok));

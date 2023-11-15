@@ -70,6 +70,7 @@ function minhenger(autok) {
     return minauto;
 }
 console.log(minhenger(autok));
+var minhengerszoveg = JSON.stringify(minhenger(autok));
 function benzinesdb(autok) {
     var db = 0;
     for (var i = 0; i < autok.length; i++) {
@@ -79,46 +80,40 @@ function benzinesdb(autok) {
     }
     return db;
 }
-var minhengerszoveg = JSON.stringify(minhenger(autok));
 function atlaghenger(autok) {
     var atlag = 0;
     for (var i = 0; i < autok.length; i++) {
         atlag = atlag + autok[i].hengerurtartalom;
     }
-    return atlag / autok.length;
+    atlag = atlag / autok.length;
+    return atlag;
 }
 function vanebenzines(autok) {
     var valasz = false;
     for (var i = 0; i < autok.length; i++) {
-        if (autok[i].benzinese) {
+        if (autok[i].benzinese == true) {
             valasz = true;
         }
     }
     return valasz;
 }
-function benzineslista(autok) {
-    var aktbenzines = [];
+function szetvalogato(autok) {
+    var benzinesek = [];
+    var nembenzinesek = [];
     for (var i = 0; i < autok.length; i++) {
-        if (autok[i].benzinese) {
-            aktbenzines.push(autok[i]);
+        if (autok[i].benzinese == true) {
+            benzinesek.push(autok[i]);
+        }
+        else {
+            nembenzinesek.push(autok[i]);
         }
     }
-    console.log(aktbenzines);
-    return aktbenzines;
+    return [benzinesek, nembenzinesek];
 }
-var benzines = benzineslista(autok);
-var benzinesszoveg = JSON.stringify(benzines);
-function nembenzineslista(autok) {
-    var aktnembenzines = [];
-    for (var i = 0; i < autok.length; i++) {
-        if (autok[i].benzinese = false) {
-            aktnembenzines.push(autok[i]);
-        }
-    }
-    return aktnembenzines;
-}
-var nembenzines = nembenzineslista(autok);
-var nembenzinesszoveg = JSON.stringify(nembenzines);
+var benzin = szetvalogato(autok)[0];
+var nembenzin = szetvalogato(autok)[1];
+var benzinesszoveg = JSON.stringify(benzin);
+var nembenzinesszoveg = JSON.stringify(nembenzin);
 function Tesztek() {
     Rowmaker("Van e minusz", szamtomb, "Igaz kene legyen", vaneminusz(szamtomb));
     Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar));
