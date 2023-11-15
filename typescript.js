@@ -40,9 +40,25 @@ function kkt(sugar) {
 }
 ;
 document.write(kkt(sugar).toString());
-var auto1 = { gyarto: "Skoda", tipus: "Fabia", hengerurtartalom: 1400, benzinese: true };
-var auto2 = { gyarto: "Opel", tipus: "Astra", hengerurtartalom: 1000, benzinese: true };
-var auto3 = { gyarto: "Tesla", tipus: "Akarmi", hengerurtartalom: 0, benzinese: false };
+var auto1 = {
+    gyarto: "Skoda",
+    tipus: "Fabia",
+    hengerurtartalom: 1400,
+    benzinese: true
+};
+console.log(auto1);
+var auto2 = {
+    gyarto: "Opel",
+    tipus: "Astra",
+    hengerurtartalom: 1000,
+    benzinese: true
+};
+var auto3 = {
+    gyarto: "Tesla",
+    tipus: "Akarmi",
+    hengerurtartalom: 0,
+    benzinese: false
+};
 var autok = [auto1, auto2, auto3];
 function minhenger(autok) {
     var minauto = autok[0];
@@ -64,10 +80,53 @@ function benzinesdb(autok) {
     return db;
 }
 var minhengerszoveg = JSON.stringify(minhenger(autok));
+function atlaghenger(autok) {
+    var atlag = 0;
+    for (var i = 0; i < autok.length; i++) {
+        atlag = atlag + autok[i].hengerurtartalom;
+    }
+    return atlag / autok.length;
+}
+function vanebenzines(autok) {
+    var valasz = false;
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].benzinese) {
+            valasz = true;
+        }
+    }
+    return valasz;
+}
+function benzineslista(autok) {
+    var aktbenzines = [];
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].benzinese) {
+            aktbenzines.push(autok[i]);
+        }
+    }
+    console.log(aktbenzines);
+    return aktbenzines;
+}
+var benzines = benzineslista(autok);
+var benzinesszoveg = JSON.stringify(benzines);
+function nembenzineslista(autok) {
+    var aktnembenzines = [];
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].benzinese = false) {
+            aktnembenzines.push(autok[i]);
+        }
+    }
+    return aktnembenzines;
+}
+var nembenzines = nembenzineslista(autok);
+var nembenzinesszoveg = JSON.stringify(nembenzines);
 function Tesztek() {
     Rowmaker("Van e minusz", szamtomb, "Igaz kene legyen", vaneminusz(szamtomb));
     Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar));
     Rowmaker("Legkisebb hengeres auto", "3 auto van", "Elvileg a teszla", minhengerszoveg);
     Rowmaker("Benzinesek szama", "A 3 auto", "Elvileg 2", benzinesdb(autok));
+    Rowmaker("Atlagos hengerurtartalom", "A 3 auto", "Elvileg 800", atlaghenger(autok));
+    Rowmaker("Van-e benzines", "A 3 auto", "Elvileg van", vanebenzines(autok));
+    Rowmaker("Benzines lista", "A 3 auto", "2 auto", benzinesszoveg);
+    Rowmaker("NemBenzines lista", "A 3 auto", "1 auto", nembenzinesszoveg);
 }
 Tesztek();
