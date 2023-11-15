@@ -175,10 +175,9 @@ function szetvalogato(autok:Auto[]):[Auto[], Auto[]]{
     return [benzinesek, nembenzinesek];
 }
 
-var benzin:Auto[] = szetvalogato(autok)[0];
-var nembenzin:Auto[] = szetvalogato(autok)[1];
-var benzinesszoveg:string = JSON.stringify(benzin);
-var nembenzinesszoveg:string = JSON.stringify(nembenzin);
+
+var benzinesszoveg:string = JSON.stringify(szetvalogato(autok)[0]);
+var nembenzinesszoveg:string = JSON.stringify(szetvalogato(autok)[1]);
 
 function Tesztek() {
 

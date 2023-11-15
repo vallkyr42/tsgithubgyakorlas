@@ -110,10 +110,8 @@ function szetvalogato(autok) {
     }
     return [benzinesek, nembenzinesek];
 }
-var benzin = szetvalogato(autok)[0];
-var nembenzin = szetvalogato(autok)[1];
-var benzinesszoveg = JSON.stringify(benzin);
-var nembenzinesszoveg = JSON.stringify(nembenzin);
+var benzinesszoveg = JSON.stringify(szetvalogato(autok)[0]);
+var nembenzinesszoveg = JSON.stringify(szetvalogato(autok)[1]);
 function Tesztek() {
     Rowmaker("Van e minusz", szamtomb, "Igaz kene legyen", vaneminusz(szamtomb));
     Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar));
