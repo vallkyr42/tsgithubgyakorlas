@@ -125,7 +125,7 @@ console.log(minhenger(autok));
 
 var minhengerszoveg: string = JSON.stringify(minhenger(autok));
 
- function benzinesdb(autok: Auto[]): number {
+function benzinesdb(autok: Auto[]): number {
     var db: number = 0;
     for (var i = 0; i < autok.length; i++) {
         if (autok[i].benzinese) {
@@ -137,17 +137,17 @@ var minhengerszoveg: string = JSON.stringify(minhenger(autok));
 
 
 
-  function atlaghenger(autok: Auto[]): number {
+function atlaghenger(autok: Auto[]): number {
     var atlag: number = 0;
     for (var i: number = 0; i < autok.length; i++) {
         atlag = atlag + autok[i].hengerurtartalom
 
     }
-atlag = atlag / autok.length;
+    atlag = atlag / autok.length;
     return atlag;
 }
 
- function vanebenzines(autok: Auto[]): boolean {
+function vanebenzines(autok: Auto[]): boolean {
     var valasz: boolean = false;
     for (var i: number = 0; i < autok.length; i++) {
         if (autok[i].benzinese == true) {
@@ -159,15 +159,15 @@ atlag = atlag / autok.length;
     return valasz;
 }
 
-function szetvalogato(autok:Auto[]):[Auto[], Auto[]]{
-    var benzinesek:Auto[] = [];
-    var nembenzinesek:Auto[] = [];
+function szetvalogato(autok: Auto[]): [Auto[], Auto[]] {
+    var benzinesek: Auto[] = [];
+    var nembenzinesek: Auto[] = [];
 
-    for(var i:number = 0; i < autok.length; i++){
-        if(autok[i].benzinese == true){
+    for (var i: number = 0; i < autok.length; i++) {
+        if (autok[i].benzinese == true) {
             benzinesek.push(autok[i]);
         }
-        else{
+        else {
             nembenzinesek.push(autok[i]);
         }
     }
@@ -176,19 +176,89 @@ function szetvalogato(autok:Auto[]):[Auto[], Auto[]]{
 }
 
 
-var benzinesszoveg:string = JSON.stringify(szetvalogato(autok)[0]);
-var nembenzinesszoveg:string = JSON.stringify(szetvalogato(autok)[1]);
+var benzinesszoveg: string = JSON.stringify(szetvalogato(autok)[0]);
+var nembenzinesszoveg: string = JSON.stringify(szetvalogato(autok)[1]);
+
+function maxhengergyarto(autok: Auto[]): string {
+    var maxauto: Auto = autok[0];
+    for (let i: number = 0; i < autok.length; i++) {
+
+        if (autok[i].hengerurtartalom > maxauto.hengerurtartalom) {
+
+            maxauto = autok[i];
+
+        }
+    }
+
+    return maxauto.gyarto;
+}
+
+function egeszhenger(autok: Auto[]): Auto[] {
+    var autolista: Auto[] = [];
+    for (let i: number = 0; i < autok.length; i++) {
+
+        if (autok[i].hengerurtartalom % 1 == 0) {
+
+            autolista.push(autok[i])
+
+        }
+    }
+
+    return autolista;
+}
+
+var egeszhengerszoveg: string = JSON.stringify(egeszhenger(autok));
+
+function minhenger2(autok: Auto[]): Auto {
+    var minauto2: Auto = autok[0];
+    for (let i = 0; i < autok.length; i++) {
+
+        if (autok[i].hengerurtartalom < minauto2.hengerurtartalom) {
+
+            minauto2 = autok[i]
+
+        }
+    }
+
+    return minauto2;
+}
+
+
+var minhengerszoveg2: string = JSON.stringify(minhenger2(autok));
+
+function minhengergyartotipus(autok: Auto[]): [string, string] {
+    var minautogyt: Auto = autok[0];
+    for (let i = 0; i < autok.length; i++) {
+
+        if (autok[i].hengerurtartalom < minautogyt.hengerurtartalom) {
+
+            minautogyt = autok[i]
+
+        }
+    }
+
+    return [minautogyt.gyarto, minautogyt.tipus];
+}
+
+
+
+
+
 
 function Tesztek() {
 
     Rowmaker("Van e minusz", szamtomb, "Igaz kene legyen", vaneminusz(szamtomb));
-    Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar)); 
+    Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar));
     Rowmaker("Legkisebb hengeres auto", "3 auto van", "Elvileg a teszla", minhengerszoveg);
     Rowmaker("Benzinesek szama", "A 3 auto", "Elvileg 2", benzinesdb(autok));
     Rowmaker("Atlagos hengerurtartalom", "A 3 auto", "Elvileg 800", atlaghenger(autok));
     Rowmaker("Van-e benzines", "A 3 auto", "Elvileg van", vanebenzines(autok));
     Rowmaker("Benzines lista", "A 3 auto", "2 auto", benzinesszoveg);
     Rowmaker("NemBenzines lista", "A 3 auto", "1 auto", nembenzinesszoveg);
+    Rowmaker("Max hengerurtartalmu auto gyartoja", "A 3 auto", "Elvileg a Skoda", maxhengergyarto(autok));
+    Rowmaker("Egeszhengerszamu autok", "A 3 auto", "Elvileg az osszes", egeszhengerszoveg);
+    Rowmaker("Legkisebb hengeres auto megegyszer", "3 auto van", "Elvileg a teszla", minhengerszoveg2);
+    Rowmaker("Legkisebb hengeres auto gyarto+tipus", "3 auto van", "Elvileg a teszla es akarmi", minhengergyartotipus(autok));
 
 }
 

@@ -112,6 +112,44 @@ function szetvalogato(autok) {
 }
 var benzinesszoveg = JSON.stringify(szetvalogato(autok)[0]);
 var nembenzinesszoveg = JSON.stringify(szetvalogato(autok)[1]);
+function maxhengergyarto(autok) {
+    var maxauto = autok[0];
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].hengerurtartalom > maxauto.hengerurtartalom) {
+            maxauto = autok[i];
+        }
+    }
+    return maxauto.gyarto;
+}
+function egeszhenger(autok) {
+    var autolista = [];
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].hengerurtartalom % 1 == 0) {
+            autolista.push(autok[i]);
+        }
+    }
+    return autolista;
+}
+var egeszhengerszoveg = JSON.stringify(egeszhenger(autok));
+function minhenger2(autok) {
+    var minauto2 = autok[0];
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].hengerurtartalom < minauto2.hengerurtartalom) {
+            minauto2 = autok[i];
+        }
+    }
+    return minauto2;
+}
+var minhengerszoveg2 = JSON.stringify(minhenger2(autok));
+function minhengergyartotipus(autok) {
+    var minautogyt = autok[0];
+    for (var i = 0; i < autok.length; i++) {
+        if (autok[i].hengerurtartalom < minautogyt.hengerurtartalom) {
+            minautogyt = autok[i];
+        }
+    }
+    return [minautogyt.gyarto, minautogyt.tipus];
+}
 function Tesztek() {
     Rowmaker("Van e minusz", szamtomb, "Igaz kene legyen", vaneminusz(szamtomb));
     Rowmaker("Kor kerulet, terulet", "A kor sugara: " + sugar, "Kerulet: 18.84, Terulet: 28.26", kkt(sugar));
@@ -121,5 +159,9 @@ function Tesztek() {
     Rowmaker("Van-e benzines", "A 3 auto", "Elvileg van", vanebenzines(autok));
     Rowmaker("Benzines lista", "A 3 auto", "2 auto", benzinesszoveg);
     Rowmaker("NemBenzines lista", "A 3 auto", "1 auto", nembenzinesszoveg);
+    Rowmaker("Max hengerurtartalmu auto gyartoja", "A 3 auto", "Elvileg a Skoda", maxhengergyarto(autok));
+    Rowmaker("Egeszhengerszamu autok", "A 3 auto", "Elvileg az osszes", egeszhengerszoveg);
+    Rowmaker("Legkisebb hengeres auto megegyszer", "3 auto van", "Elvileg a teszla", minhengerszoveg2);
+    Rowmaker("Legkisebb hengeres auto gyarto+tipus", "3 auto van", "Elvileg a teszla es akarmi", minhengergyartotipus(autok));
 }
 Tesztek();
